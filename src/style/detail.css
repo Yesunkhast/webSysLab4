@@ -1,0 +1,31 @@
+.detail-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.detail-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+.detail-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px solid #000;
+  margin-right: 20px;
+}
+
+.detail-info {
+  flex-grow: 1;
+}
+
+.detail-info h2 {
+  margin: 10px 0;
+  border: 1px solid #000;
+  padding: 10px;
+}

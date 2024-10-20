@@ -1,0 +1,19 @@
+.user{
+    border: solid black 1px;
+    border-radius: 5px;
+    margin: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.user img {
+    width: 80px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.user div {
+    cursor: pointer;
+}
