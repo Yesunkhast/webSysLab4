@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {AuthProvider} from "./context/authContext";
 import Home from "./pages/home";
 import Places from "./pages/places";
-import Authenticate from "./pages/authenticate";
+import Authenticate from "./pages/authenticate.jsx";
 import NewPlace from "./pages/newPlace";
 import EditPlace from "./pages/editPlace";
 import PrivateRoute from "./pages/privateRoute";
@@ -154,7 +154,7 @@ function App() {
             element={
               <PrivateRoute>
                 <NewPlace />
-              </PrivateRoute>
+              </PrivateRoute> 
             }
           />
           <Route

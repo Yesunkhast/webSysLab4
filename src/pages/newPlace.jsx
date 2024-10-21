@@ -24,7 +24,7 @@ const NewPlace = () => {
   return (
     <div>
       <h1>Add New Place</h1>
-      <form onSubmit={handleAddPlace}>
+      {/* <form onSubmit={handleAddPlace}>
         <input
           type="text"
           placeholder="Title"
@@ -47,7 +47,7 @@ const NewPlace = () => {
           }
         />
         <button type="submit">Add Place</button>
-      </form>
+      </form> */}
     </div>
   );
 };
