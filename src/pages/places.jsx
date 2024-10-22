@@ -14,14 +14,18 @@ const Places = () => {
     const storedData = JSON.parse(localStorage.getItem("users")) || {};
 
     const userPlaces = storedData[uid]?.places || {};
-    // Map over both numbered and string-based keys
     const allPlaces = Object.keys(userPlaces).map((key) => ({
       key,
       ...userPlaces[key],
     }));
 
-    setPlaces(allPlaces); // Set the mapped places
+    setPlaces(allPlaces);
   }, []);
+
+  function remove(key) {
+    const updatedPlaces = places.filter((place) => place.key !== key);
+    setPlaces(updatedPlaces);
+  }
 
   console.log("places", places);
 
@@ -41,6 +45,7 @@ const Places = () => {
             title={place.title}
             description={place.description}
             cordinates={place.cordinates}
+            delete={remove}
           />
         ))
       ) : (

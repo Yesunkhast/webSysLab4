@@ -19,7 +19,11 @@ const Detail = () => {
         <img src={place.image} alt={place.title} className="detail-image" />
         <div className="detail-info">
           <h2>{place.description}</h2>
-          <h2>{place.cordinates}</h2>
+          {place.cordinates === undefined ? (
+            <h2>150</h2>
+          ) : (
+            <h2>{place.cordinates}</h2>
+          )}
         </div>
       </div>
     </div>
