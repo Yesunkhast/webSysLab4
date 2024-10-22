@@ -4,17 +4,22 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState({});
+  const [users, setUsers] = useState({});
   const [isLogin, setIslogin] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("users"));
+    const data = JSON.parse(localStorage.getItem("users"));
+    setUsers(data);
     if (storedUser) setUser(storedUser);
   }, []);
 
-  const register = (userData) => {
+  const register = (user4) => {
     setIslogin(true);
-    localStorage.setItem("users", JSON.stringify(userData));
-    console.log(userData);
+    const newUser = JSON.stringify(user4);
+    setUser(newUser);
+    localStorage.setItem("users", JSON.stringify({...users, user4}));
+    console.log(user4);
   };
 
   const login = (login) => {
@@ -25,13 +30,13 @@ export const AuthProvider = ({children}) => {
         user[1].mail.includes(login.mail)
       ) {
         setIslogin(true);
+        setUser(user);
         console.log("nervterle", login + user[1]);
         return true;
-      } else {
-        console.log("failed", login + user[1]);
-        return false;
       }
     });
+    // console.log("failed", login + user[1]);
+    return false;
   };
 
   const logout = () => {
@@ -40,7 +45,7 @@ export const AuthProvider = ({children}) => {
   };
 
   return (
-    <AuthContext.Provider value={{isLogin, login, logout, register}}>
+    <AuthContext.Provider value={{isLogin, user, login, logout, register}}>
       {children}
     </AuthContext.Provider>
   );

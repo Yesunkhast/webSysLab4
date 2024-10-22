@@ -3,8 +3,7 @@ import {AuthProvider} from "./context/authContext";
 import Home from "./pages/home";
 import Places from "./pages/places";
 import Authenticate from "./pages/authenticate";
-import NewPlace from "./pages/newPlace";
-import EditPlace from "./pages/editPlace";
+import NewPlace from "./pages/editPlace.jsx";
 import PrivateRoute from "./pages/privateRoute";
 import NoPage from "./pages/noPage.jsx";
 import Detail from "./pages/detail.jsx";
@@ -109,37 +108,38 @@ function App() {
     },
   };
 
-  const user4 = {
-    id: "user3",
-    name: "user3",
-    mail: "user3@gmail.com",
-    password: "user3",
-    isLogin: false,
-    image:
-      "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    places: [
-      {
-        id: 0,
-        title: "place1",
-        image:
-          "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  // const user4 = {
+  //   id: "user3",
+  //   name: "user3",
+  //   mail: "user3@gmail.com",
+  //   password: "user3",
+  //   isLogin: false,
+  //   image:
+  //     "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   places: [
+  //     {
+  //       id: 0,
+  //       title: "place1",
+  //       image:
+  //         "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
-        description: "description",
-        cordinates: "cordinates",
-      },
-      {
-        id: 2,
-        title: "place3",
-        image:
-          "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //       description: "description",
+  //       cordinates: "cordinates",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "place3",
+  //       image:
+  //         "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
-        description: "description",
-        cordinates: "cordinates",
-      },
-    ],
-  };
+  //       description: "description",
+  //       cordinates: "cordinates",
+  //     },
+  //   ],
+  // };
+  // const data = JSON.parse(localStorage.getItem("users"));
 
-  localStorage.setItem("users", [JSON.stringify(sampleUsers)]);
+  localStorage.setItem("users", JSON.stringify(sampleUsers));
 
   return (
     <AuthProvider>
@@ -150,18 +150,10 @@ function App() {
           <Route path="/:uid/places" element={<Places />} />
           <Route path="/:pid/detail/:id" element={<Detail />} />
           <Route
-            path="/places/new"
+            path="/:uid/places/new"
             element={
               <PrivateRoute>
                 <NewPlace />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/places/:pid"
-            element={
-              <PrivateRoute>
-                <EditPlace />
               </PrivateRoute>
             }
           />

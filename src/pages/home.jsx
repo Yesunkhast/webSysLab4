@@ -1,10 +1,12 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
+import AuthContext from "../context/authContext";
 import Header from "./header";
 import User from "./user";
 import "../style/home.css";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const {isLogin, user} = useContext(AuthContext);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("users"));
@@ -15,13 +17,14 @@ const Home = () => {
 
   const name = "Нүүр хуудас";
 
-  // users.map((user) => {
-  //   console.log(user[1].password);
-  // });
-
+  var title = "Login / Register";
+  if (isLogin === true) {
+    // title = user[1].name;
+  }
+  // console.log(users);
   return (
     <>
-      <Header name={name} link={"/authenticate"} title={"Login / Register"} />
+      <Header name={name} link={"/authenticate"} title={title} />
 
       <div className="home">
         {users.map(([key, user]) => {

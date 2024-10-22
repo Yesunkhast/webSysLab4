@@ -6,33 +6,45 @@ import "../style/home.css";
 
 const Places = () => {
   const {uid} = useParams();
-  const [places, setPlaces] = useState({});
+
+  const [places, setPlaces] = useState([]);
+  const [keys, setKeys] = useState();
 
   useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-    setPlaces(users[uid]?.places);
-  }, [uid]);
+    const storedData = JSON.parse(localStorage.getItem("users")) || {};
+
+    const userPlaces = storedData[uid]?.places || {};
+    // Map over both numbered and string-based keys
+    const allPlaces = Object.keys(userPlaces).map((key) => ({
+      key,
+      ...userPlaces[key],
+    }));
+
+    setPlaces(allPlaces); // Set the mapped places
+  }, []);
+
+  console.log("places", places);
 
   return (
     <div className="home">
       <Header
         name={uid + "'s places"}
-        link={"/places/new"}
+        link={`/${uid}/places/new`}
         title={"Add place"}
       />
       {places.length > 0 ? (
-        places.map((place, index) => (
+        places.map((place) => (
           <Place
             key={place.id}
             image={place.image}
-            id={place.id}
+            id={place.key}
             title={place.title}
             description={place.description}
             cordinates={place.cordinates}
           />
         ))
       ) : (
-        <p>No places available.</p>
+        <h1>Gazar oldsongue hu.</h1>
       )}
     </div>
   );

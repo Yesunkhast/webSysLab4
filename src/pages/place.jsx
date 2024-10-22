@@ -1,15 +1,16 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import "../style/user.css";
 import {WiAlien} from "react-icons/wi";
 
 const Place = (props) => {
+  const {uid} = useParams();
   return (
-    <div className="user" onClick={() => {}}>
+    <div className="user">
       <img src={props.image} alt=""></img>
       <h3>{props.title}</h3>
 
       <div>
-        <Link to={`/user1/detail/${props.id}`}>
+        <Link to={`/${uid}/detail/${props.id}`}>
           <WiAlien size={80} />
         </Link>
       </div>
