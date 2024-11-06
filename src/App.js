@@ -3,14 +3,76 @@ import {AuthProvider} from "./context/authContext";
 import Home from "./pages/home";
 import Places from "./pages/places";
 import Authenticate from "./pages/authenticate";
-import NewPlace from "./pages/editPlace.jsx";
+import EditPlace from "./pages/editPlace.jsx";
 import PrivateRoute from "./pages/privateRoute";
 import NoPage from "./pages/noPage.jsx";
 import Detail from "./pages/detail.jsx";
+import NewPlace from "./pages/newPlace.jsx";
+import React from "react";
 
 function App() {
-  const sampleUsers = {
-    user1: {
+
+  // const [data, setData] = React.useState({});
+ 
+  // React.useEffect(()=> {
+  //   const fetchData = async () => {
+  //     const response = await fetch("http://localhost:4000", {
+  //       method: "GET"
+  //     });
+  //     const json = await response.json();
+  //     setData(json)
+  //   }
+
+  //   fetchData().catch((e) => console.log(e))
+
+  // },[])
+
+  const places = {
+    place1:{
+          id: "place1",
+          title: "place1",
+          users: ["user1","user2","user3"],
+          image:
+            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          description: "A scenic view of the mountains.",
+          cordinates: "45.4215, -75.6972",
+    },
+    place2:{
+          id: "place2",
+          title: "place2",
+          users: ["user1", "user2"],
+          image:
+            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          description: "A scenic view of the mountains.",
+          cordinates: "45.4215, -75.6972",
+    },
+    place3:{
+          id: "place3",
+          title: "place3",
+          users: ["user1"],
+          image:
+            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          description: "A scenic view of the mountains.",
+          cordinates: "45.4215, -75.6972",
+    },
+  }
+  const userPlaces = {
+        userPlace1: {
+          user: "user1",
+          place: ["place1, place2, place3"]
+    },
+        userPlace2: {
+          user: "user2",
+          place: ["place1, place2 "]
+    },
+        userPlace3: {
+          user: "user3",
+          place: ["place1"]
+    },
+  }
+
+  const users = {
+    user1:{
       id: "user1",
       name: "user1",
       mail: "user1@gmail.com",
@@ -18,128 +80,32 @@ function App() {
       isLogin: false,
       image:
         "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      places: [
-        {
-          id: 0,
-          title: "place1",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          description: "A scenic view of the mountains.",
-          cordinates: "45.4215, -75.6972",
-        },
-        {
-          id: 1,
-          title: "place2",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "A peaceful park in the city.",
-          cordinates: "40.7128, -74.0060",
-        },
-        {
-          id: 2,
-          title: "place3",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "A historic monument by the sea.",
-          cordinates: "51.5074, -0.1278",
-        },
-      ],
     },
-
-    user2: {
+    user2:{
       id: "user2",
       name: "user2",
       mail: "user2@gmail.com",
-      password: "user2",
+      password: "user1",
       isLogin: false,
       image:
         "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      places: [
-        {
-          id: 0,
-          title: "place1",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "description",
-          cordinates: "cordinates",
-        },
-        {
-          id: 2,
-          title: "place2",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "description",
-          cordinates: "cordinates",
-        },
-      ],
     },
-    user3: {
+    user3:{
       id: "user3",
       name: "user3",
       mail: "user3@gmail.com",
-      password: "user3",
+      password: "user1",
       isLogin: false,
       image:
         "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      places: [
-        {
-          id: 0,
-          title: "place1",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "description",
-          cordinates: "cordinates",
-        },
-        {
-          id: 1,
-          title: "place3",
-          image:
-            "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-          description: "description",
-          cordinates: "cordinates",
-        },
-      ],
     },
-  };
+  }
 
-  // const user4 = {
-  //   id: "user3",
-  //   name: "user3",
-  //   mail: "user3@gmail.com",
-  //   password: "user3",
-  //   isLogin: false,
-  //   image:
-  //     "https://images.unsplash.com/photo-1616540389399-3033c4ba7072?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   places: [
-  //     {
-  //       id: 0,
-  //       title: "place1",
-  //       image:
-  //         "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  localStorage.setItem("places", JSON.stringify(places));
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("userPlaces", JSON.stringify(userPlaces));
 
-  //       description: "description",
-  //       cordinates: "cordinates",
-  //     },
-  //     {
-  //       id: 2,
-  //       title: "place3",
-  //       image:
-  //         "https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-  //       description: "description",
-  //       cordinates: "cordinates",
-  //     },
-  //   ],
-  // };
-  // const data = JSON.parse(localStorage.getItem("users"));
-
-  localStorage.setItem("users", JSON.stringify(sampleUsers));
+  // console.log("data",data)
 
   return (
     <AuthProvider>
@@ -154,6 +120,14 @@ function App() {
             element={
               <PrivateRoute>
                 <NewPlace />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/:pid/detail/:id/edit"
+            element={
+              <PrivateRoute>
+                <EditPlace />
               </PrivateRoute>
             }
           />

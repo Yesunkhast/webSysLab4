@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {useParams} from "react-router-dom";
 import Header from "./header";
 import "../style/detail.css";
@@ -6,15 +6,16 @@ import "../style/detail.css";
 
 const Detail = () => {
   const {id, pid} = useParams();
-  const [place, setPlaces] = useState({});
-  useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("users")) || {};
-    setPlaces(users[pid]?.places[id]);
-  }, [id]);
+  const [place, setPlaces] = React.useState({});
+  React.useEffect(() => {
+    const place = JSON.parse(localStorage.getItem("places")) || {};
+    console.log(place)
+    setPlaces(place[id]);
+  }, [pid,id]);
 
   return (
     <div className="detail-container">
-      <Header name={place.title} />
+      <Header name={place.title} link={`/${pid}/detail/${place.id}/edit`} title={"Edit"}/>
       <div className="detail-content">
         <img src={place.image} alt={place.title} className="detail-image" />
         <div className="detail-info">

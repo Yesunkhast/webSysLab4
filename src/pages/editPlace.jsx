@@ -1,38 +1,24 @@
-import {useState, useEffect} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
 import {useParams} from "react-router-dom";
-import {useContext} from "react";
-import AuthContext from "../context/authContext";
+// import {useContext} from "react";
+// import AuthContext from "../context/authContext";
 import "../style/editplace.css";
 
 const EditPlace = () => {
   const {uid} = useParams();
-  const [Data, setData] = useState({
-    id: "",
-    title: "",
-    description: "",
-    coordinates: "",
-    image: "",
-  });
-  const [placeData, setPlaceData] = useState([]);
+  const [placeData, setPlaceData] = React.useState([]);
   const navigate = useNavigate();
 
-  const {user} = useContext(AuthContext);
+  // const {user} = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const users = JSON.parse(localStorage.getItem("users")) || {};
-  //   // const place = Object.values(users).flatMap((user) => user.places);
-  //   const userPlaces = users[uid]?.places || [];
-  //   setPlaceData(userPlaces);
-  // }, [uid]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     const users = JSON.parse(localStorage.getItem("users")) || {};
     const userPlaces = users[uid]?.places || [];
     setPlaceData(userPlaces);
-  }, []);
+  }, [uid]);
 
-  console.log("old places:", placeData);
+  console.log("editing place:", placeData);
 
   const handleEditPlace = (e) => {
     e.preventDefault();
@@ -58,29 +44,29 @@ const EditPlace = () => {
     }
   };
 
-  const handleAddPlace = (e) => {
-    e.preventDefault();
-    const users = JSON.parse(localStorage.getItem("users")) || {};
+  // const handleAddPlace = (e) => {
+  //   e.preventDefault();
+  //   const users = JSON.parse(localStorage.getItem("users")) || {};
 
-    if (!users[uid]) {
-      console.error(`User with ID ${uid} not found.`);
-    } else {
-      const userPlaces = users[uid]?.places || [];
+  //   if (!users[uid]) {
+  //     console.error(`User with ID ${uid} not found.`);
+  //   } else {
+  //     const userPlaces = users[uid]?.places || [];
 
-      const mergedPlace = {
-        ...placeData,
-        Data,
-      };
+  //     const mergedPlace = {
+  //       ...placeData,
+  //       Data,
+  //     };
 
-      users[uid].places = mergedPlace;
+  //     users[uid].places = mergedPlace;
 
-      localStorage.setItem("users", JSON.stringify(users));
+  //     localStorage.setItem("users", JSON.stringify(users));
 
-      console.log("New place added:", mergedPlace);
+  //     console.log("New place added:", mergedPlace);
 
-      navigate(`/${uid}/places/new`);
-    }
-  };
+  //     navigate(`/${uid}/places`);
+  //   }
+  // };
 
   return (
     <div className="box">
@@ -121,7 +107,7 @@ const EditPlace = () => {
           <button type="submit">Save Changes</button>
         </form>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <h1>Add New Place</h1>
         <form onSubmit={handleAddPlace}>
           <input
@@ -155,7 +141,7 @@ const EditPlace = () => {
           />
           <button type="submit">Add Place</button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

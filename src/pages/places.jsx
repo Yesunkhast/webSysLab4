@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React from "react";
 import Header from "./header";
 import Place from "./place";
 import "../style/home.css";
@@ -7,27 +7,22 @@ import "../style/home.css";
 const Places = () => {
   const {uid} = useParams();
 
-  const [places, setPlaces] = useState([]);
-  const [keys, setKeys] = useState();
+  const [places, setPlaces] = React.useState({});
 
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("users")) || {};
+  React.useEffect(() => {
+    const places = JSON.parse(localStorage.getItem("places")) || {};
+    setPlaces(places);
+  }, [uid]);
 
-    const userPlaces = storedData[uid]?.places || {};
-    const allPlaces = Object.keys(userPlaces).map((key) => ({
-      key,
-      ...userPlaces[key],
-    }));
-
-    setPlaces(allPlaces);
-  }, []);
-
+  //delete hih api der
   function remove(key) {
     const updatedPlaces = places.filter((place) => place.key !== key);
     setPlaces(updatedPlaces);
   }
 
-  console.log("places", places);
+  // console.log("places", Object.values(places).map((e)=>{
+  //   return e.users.includes(uid)
+  // }));
 
   return (
     <div className="home">
@@ -36,21 +31,24 @@ const Places = () => {
         link={`/${uid}/places/new`}
         title={"Add place"}
       />
-      {places.length > 0 ? (
-        places.map((place) => (
+      {
+        Object.values(places).map((place)=>{
+          if(place.users.includes(uid))
+          return (
           <Place
-            key={place.id}
             image={place.image}
-            id={place.key}
+            id={place.id}
             title={place.title}
             description={place.description}
             cordinates={place.cordinates}
             delete={remove}
-          />
-        ))
-      ) : (
+          />)
+          else
+          (
         <h1>Gazar oldsongue hu.</h1>
-      )}
+      )
+        })
+      }
     </div>
   );
 };

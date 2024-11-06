@@ -1,18 +1,24 @@
-import {createContext, useState, useEffect} from "react";
+import React from "react";
 
-const AuthContext = createContext();
+const AuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
-  const [user, setUser] = useState({});
-  const [users, setUsers] = useState({});
-  const [isLogin, setIslogin] = useState(false);
+  const [user, setUser] = React.useState({});
+  const [users, setUsers] = React.useState({});
+  const [isLogin, setIslogin] = React.useState(false);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("users"));
-    const data = JSON.parse(localStorage.getItem("users"));
-    setUsers(data);
-    if (storedUser) setUser(storedUser);
-  }, []);
+  // React.useEffect(()=> {
+  //   const fetchData = async () => {
+  //     const response = await fetch("http://localhost:4000", {
+  //       method: "GET"
+  //     });
+  //     const json = await response.json();
+  //     setUsers(Object.entries(json))
+  //   }
+
+  //   fetchData().catch((e) => console.log(e))
+
+  // },[])
 
   const register = (user4) => {
     setIslogin(true);
@@ -23,8 +29,8 @@ export const AuthProvider = ({children}) => {
   };
 
   const login = (login) => {
-    const users = JSON.parse(localStorage.getItem("users"));
-    Object.entries(users).map((user) => {
+    // const users = JSON.parse(localStorage.getItem("users"));
+    users.map((user) => {
       if (
         user[1].password.includes(login.password) &&
         user[1].mail.includes(login.mail)
@@ -32,11 +38,9 @@ export const AuthProvider = ({children}) => {
         setIslogin(true);
         setUser(user);
         console.log("nervterle", login + user[1]);
-        return true;
       }
     });
-    // console.log("failed", login + user[1]);
-    return false;
+    return true;
   };
 
   const logout = () => {

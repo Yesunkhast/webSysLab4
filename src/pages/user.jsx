@@ -3,7 +3,7 @@ import {WiAlien} from "react-icons/wi";
 import {Link} from "react-router-dom";
 const User = (props) => {
   return (
-    <div className="user" onClick={() => {}}>
+    <div className="user">
       <img src={props.image} alt=""></img>
       <h3>{props.name}</h3>
       <h3>{props.mail}</h3>
