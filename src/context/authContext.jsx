@@ -29,27 +29,22 @@ export const AuthProvider = ({children}) => {
   };
 
   const login = (login) => {
-    // const users = JSON.parse(localStorage.getItem("users"));
-    users.map((user) => {
+    const users = JSON.parse(localStorage.getItem("users"));
+    Object.values(users).map((user) => {
       if (
-        user[1].password.includes(login.password) &&
-        user[1].mail.includes(login.mail)
+        user.password.includes(login.password) &&
+        user.mail.includes(login.mail)
       ) {
         setIslogin(true);
         setUser(user);
-        console.log("nervterle", login + user[1]);
+        console.log("nervterle", login + user);
       }
     });
     return true;
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  };
-
   return (
-    <AuthContext.Provider value={{isLogin, user, login, logout, register}}>
+    <AuthContext.Provider value={{isLogin, user, login, register}}>
       {children}
     </AuthContext.Provider>
   );
